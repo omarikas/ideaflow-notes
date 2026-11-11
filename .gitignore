@@ -1,8 +1,15 @@
-# ideaflow data dir — back up the capture log and project notes only.
+# ideaflow data dir — back up the capture log, project notes, and the web viewer.
 # Everything is ignored, then those paths (and this file) are re-included.
 /*
 !/.gitignore
+!/.nojekyll
 !/entries.jsonl
+!/index.html
+!/app.js
+!/sw.js
+!/manifest.webmanifest
+!/icons/
+!/icons/*
 !/projects/
 !/projects/*/
 /projects/*/*
