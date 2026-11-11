@@ -141,7 +141,13 @@ async function apiAppend(entry) {
     if (get.ok) {
       const j = await get.json();
       sha = j.sha;
-      cur = b64decode(j.content || "");
+      if (j.content) {
+        cur = b64decode(j.content);
+      } else if (j.git_url) {
+        // Contents API omits `content` for files >1MB — read the blob instead.
+        const blob = await fetch(j.git_url, { headers: headers() });
+        if (blob.ok) cur = b64decode((await blob.json()).content || "");
+      }
     } else if (get.status !== 404) {
       throw new Error("GET " + get.status);
     }
