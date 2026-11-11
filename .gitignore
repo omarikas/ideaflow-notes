@@ -4,6 +4,7 @@
 !/.gitignore
 !/.gitattributes
 !/.nojekyll
+!/*.shortcut
 !/entries.jsonl
 !/index.html
 !/app.js
