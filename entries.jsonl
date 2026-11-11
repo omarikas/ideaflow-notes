@@ -1,1 +1,5 @@
-{"status":"new","id":"2147483647","ts":"2026-11-11","source":"button","type":"unknown","text":"test from mac"}
+eyJzdGF0dXMiOiJuZXciLCJpZCI6IjIxNDc0ODM2NDciLCJ0cyI6IjIwMjYt
+MTEtMTEiLCJzb3VyY2UiOiJidXR0b24iLCJ0eXBlIjoidW5rbm93biIsInRl
+eHQiOiJ0ZXN0IGZyb20gbWFjIn0=
+
+{"id":"2147483647","ts":"2026-11-11","text":"test from mac","status":"new","source":"button","type":"unknown"}
