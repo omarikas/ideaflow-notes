@@ -1,0 +1,8 @@
+# ideaflow data dir — back up project notes only.
+# Everything is ignored, then the notes tree (and this file) is re-included.
+/*
+!/.gitignore
+!/projects/
+!/projects/*/
+/projects/*/*
+!/projects/*/notes.md
