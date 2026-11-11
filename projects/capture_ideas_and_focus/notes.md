@@ -5,3 +5,4 @@ apps smoke
 testing reopen
 test terminal directory
 test auto terminal close
+good point for V1
