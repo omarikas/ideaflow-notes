@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-title" content="ideaflow">
 <style>
   :root{
-    --bg:#0b0c10; --card:#15171e; --card2:#1c1f28; --fg:#e8e9ed; --mut:#8b90a0;
-    --acc:#7c6cff; --acc2:#22d3ee; --line:#262a35; --chip:#232734; --ok:#3ecf8e; --warn:#ffcf6b;
+    --bg:#0b0c10; --card:#15171e; --fg:#e8e9ed; --mut:#8b90a0;
+    --acc:#7c6cff; --acc2:#22d3ee; --line:#262a35; --chip:#232734;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);
@@ -36,7 +36,7 @@
   input[type=search]:focus{border-color:var(--acc)}
   button.icon{background:var(--card);border:1px solid var(--line);color:var(--fg);
     border-radius:12px;padding:0 13px;font-size:16px;cursor:pointer}
-  main{max-width:680px;margin:0 auto;padding:14px 14px calc(env(safe-area-inset-bottom) + 96px)}
+  main{max-width:680px;margin:0 auto;padding:14px 14px calc(env(safe-area-inset-bottom) + 40px)}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;
     padding:14px 15px;margin:0 0 12px}
   .card .text{white-space:pre-wrap;word-break:break-word;font-size:16.5px}
@@ -45,45 +45,9 @@
   .chip{background:var(--chip);border-radius:999px;padding:3px 9px;color:var(--mut)}
   .chip.proj{color:var(--acc);background:#241f3a}
   .chip.src{color:var(--acc2)}
-  .chip.pend{color:var(--warn)}
   .empty,.status{color:var(--mut);text-align:center;padding:40px 10px}
   .offline{background:#3a2a12;color:#ffd79a}
   .hidden{display:none}
-
-  form.compose{position:fixed;left:0;right:0;bottom:0;z-index:6;
-    display:flex;gap:8px;align-items:center;max-width:680px;margin:0 auto;
-    padding:10px 12px calc(env(safe-area-inset-bottom) + 10px);
-    background:rgba(11,12,16,.92);backdrop-filter:saturate(1.4) blur(12px);
-    border-top:1px solid var(--line)}
-  form.compose textarea{flex:1;background:var(--card);border:1px solid var(--line);color:var(--fg);
-    border-radius:14px;padding:11px 13px;font-size:16px;outline:none;resize:none;
-    max-height:120px;min-height:44px;font-family:inherit}
-  form.compose textarea:focus{border-color:var(--acc)}
-  .send{background:linear-gradient(135deg,var(--acc),var(--acc2));border:0;color:#0b0c10;
-    font-weight:700;border-radius:50%;width:46px;height:46px;font-size:20px;cursor:pointer;
-    flex:0 0 auto}
-  .send[disabled]{opacity:.45}
-
-  .sheet{position:fixed;inset:0;z-index:9;background:rgba(0,0,0,.55);
-    display:flex;align-items:flex-end}
-  .sheet .inner{background:var(--card2);width:100%;max-width:680px;margin:0 auto;
-    border-radius:18px 18px 0 0;padding:18px 16px calc(env(safe-area-inset-bottom) + 18px)}
-  .sheet h2{margin:0 0 6px;font-size:17px}
-  .sheet p{color:var(--mut);font-size:13px;margin:0 0 12px}
-  .sheet input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--fg);
-    border-radius:12px;padding:12px;font-size:16px;outline:none}
-  .sheet .row{display:flex;gap:8px;margin-top:12px}
-  .sheet button{flex:1;border-radius:12px;padding:12px;font-size:15px;cursor:pointer;border:1px solid var(--line)}
-  .sheet .primary{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#0b0c10;
-    border:0;font-weight:700}
-  .sheet .ghost{background:transparent;color:var(--fg)}
-
-  #toast{position:fixed;left:50%;transform:translateX(-50%);
-    bottom:calc(env(safe-area-inset-bottom) + 84px);z-index:8;
-    background:#22242e;color:var(--fg);border:1px solid var(--line);
-    padding:10px 14px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .2s;
-    pointer-events:none;max-width:88%}
-  #toast.show{opacity:1}
 </style>
 </head>
 <body>
@@ -91,7 +55,6 @@
   <div class="bar">
     <div class="logo">idea<b>flow</b></div>
     <div class="count" id="count"></div>
-    <button class="icon" id="gear" title="Settings" aria-label="Settings">⚙</button>
   </div>
   <div class="tools">
     <input id="q" type="search" placeholder="search ideas…" autocomplete="off" enterkeyhint="search">
@@ -103,26 +66,6 @@
   <div id="list"></div>
   <div id="empty" class="empty hidden">No ideas yet.</div>
 </main>
-
-<form class="compose" id="compose">
-  <textarea id="note" rows="1" placeholder="new idea…" enterkeyhint="send"></textarea>
-  <button class="send" id="send" type="submit" aria-label="Capture">↑</button>
-</form>
-
-<div class="sheet hidden" id="settings">
-  <div class="inner">
-    <h2>Capture setup</h2>
-    <p>Paste a GitHub fine-grained token (repo <b id="repoLabel">…</b>, <b>Contents: read &amp; write</b>) to capture from the phone. Stored only on this device.</p>
-    <input id="token" type="password" placeholder="github_pat_…" autocomplete="off" spellcheck="false">
-    <div class="row">
-      <button class="ghost" id="clearToken" type="button">Clear</button>
-      <button class="primary" id="saveToken" type="button">Save</button>
-    </div>
-    <div class="row"><button class="ghost" id="closeSheet" type="button">Close</button></div>
-  </div>
-</div>
-
-<div id="toast"></div>
 <script src="./app.js"></script>
 </body>
 </html>
