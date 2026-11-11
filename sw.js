@@ -1,6 +1,6 @@
 "use strict";
 
-const VERSION = "v1";
+const VERSION = "v2";
 const SHELL = "shell-" + VERSION;
 const DATA = "data-" + VERSION;
 const SHELL_FILES = [
