@@ -2,7 +2,6 @@
 # Everything is ignored, then those paths (and this file) are re-included.
 /*
 !/.gitignore
-!/.gitattributes
 !/.nojekyll
 !/entries.jsonl
 !/index.html
