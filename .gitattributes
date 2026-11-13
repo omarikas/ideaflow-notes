@@ -1,2 +1,4 @@
 entries.jsonl merge=union
+presence.jsonl merge=union
+people.jsonl merge=union
 projects/*/notes.md merge=union

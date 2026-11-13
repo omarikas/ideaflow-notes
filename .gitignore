@@ -6,6 +6,10 @@
 !/.nojekyll
 !/*.shortcut
 !/entries.jsonl
+!/people.jsonl
+!/presence.jsonl
+!/remind.html
+!/remind.js
 !/index.html
 !/app.js
 !/sw.js
